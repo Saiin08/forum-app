@@ -21,3 +21,9 @@ Route::get('/', function () {
 Route::get('/questions',[QuestionController::class,'index'])->name('questions.index');
 
 Route::get('/questions/{id}',[QuestionController::class,'show'])->name('questions.show');
+
+Route::get('/questions/ask',function(){
+    return view('questions.create');
+})->name('questions.ask');
+
+Route::post('/questions/store',[QuestionController::class,'create'])->name('questions.create');

@@ -17,6 +17,10 @@
       </div>
     </section>
 
+    <div class="ask">
+      <a href="{{route('questions.ask')}}">Ask a question</a>
+    </div>
+
   <section id="questions">
     <div class="container">
       @foreach ($questions as $question)

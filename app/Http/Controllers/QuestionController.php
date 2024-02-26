@@ -24,4 +24,25 @@ class QuestionController extends Controller
         return view('questions.show',compact('question','answers'));
 
     }
+    
+    public function create(Request $request) {
+        $this->validate($request,[
+            'title'=>'required',
+            'text'=>'required',
+        ],[
+            'title.required'=>'Title is required',
+            'text.required'=>'Text is required',
+        ]);
+
+        $data=$request->all();
+
+        $new_question = New Question;
+        $new_question->title=$data['title'];
+        $new_question->text=$data['text'];
+        $new_question->save();
+
+        session()->flash('success_message', 'Your question has been posted!');
+
+        return redirect()->route('questions.index');
+    }
 }

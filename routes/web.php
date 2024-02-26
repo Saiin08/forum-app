@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/questions',[QuestionController::class,'index'])->name('questions.index');
 
-Route::get('/questions/{id}',[QuestionController::class,'show'])->name('questions.show');
+Route::get('/questions/{id}',[QuestionController::class,'show'])->whereNumber('id')->name('questions.show');
 
 Route::get('/questions/ask',function(){
     return view('questions.create');

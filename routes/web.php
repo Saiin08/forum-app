@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\QuestionController;
+use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,9 @@ Route::get('/questions/ask',function(){
 })->name('questions.ask');
 
 Route::post('/questions/store',[QuestionController::class,'create'])->name('questions.create');
+
+Route::get('/questions/edit/{id}',[QuestionController::class,'edit'])->whereNumber('id')->name('questions.edit');
+
+Route::put('/questions/edit/{id}',[QuestionController::class,'save'])->whereNumber('id')->name('questions.save');
+
+Route::delete('questions/delete/{id}',[QuestionController::class,'delete'])->whereNumber('id')->name('questions.delete');

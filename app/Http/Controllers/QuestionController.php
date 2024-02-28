@@ -45,4 +45,36 @@ class QuestionController extends Controller
 
         return redirect()->route('questions.index');
     }
+
+    public function edit($id) {
+        $question= Question::findOrFail($id);
+
+        return view('questions.edit',compact('question'));
+    }
+
+    public function save(Request $request , $id) {
+        $this->validate($request,[
+            'title'=>'required',
+            'text'=>'required',
+        ],[
+            'title.required'=>'Title is required',
+            'text.required'=>'Text is required',
+        ]);
+
+        $question= Question::findOrFail($id);
+        $question->title= $request->input('title')??$question->title;
+        $question->text= $request->input('text')??$question->text;
+        $question->save();
+
+        session()->flash('success_message','Your question has been updated');
+        
+        return redirect()->route('questions.index');
+    }
+
+    public function delete($id) {
+        $question= Question::findOrFail($id);
+        $question->delete();
+
+        return redirect()->route('questions.index');
+    }
 }

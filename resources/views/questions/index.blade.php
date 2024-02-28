@@ -24,6 +24,20 @@
               <div class="question-info">
                   asked at {{$question->created_at}} by<a href="">slavo</a>
               </div>
+
+              <div class="edit">
+                <a href="{{route('questions.edit',['id'=>$question->id])}}">Edit</a>
+              </div>
+              
+              <div class="delete">
+                <form action="{{route('questions.delete',['id'=>$question->id])}}" method="POST">
+                  @method('DELETE')
+                  @csrf
+
+                  <button type="submit" onclick="return confirm('Remove question?')">Delete</button>
+
+                </form>
+              </div>
           </div>
 
           <div class="question-right">

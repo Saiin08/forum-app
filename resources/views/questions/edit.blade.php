@@ -1,7 +1,19 @@
  @extends('layouts.layout')
   @section('content')
+
+    @if (count($errors) > 0)
+      <div>
+          @foreach ($errors->all() as $error)
+          <div class="alert alert-danger" role="alert">
+              {{ $error }}
+          </div>
+          @endforeach
+      </div>
+    @endif
+
       <section class="container">
-        <form action="{{route('questions.create')}}" method="post">
+        <form action="{{route('questions.save',['id'=>$question->id])}}" method="post">
+          @method('PUT')
           @csrf
           
           <label for="title">Title:</label><br>
@@ -13,4 +25,5 @@
           <button type="submit">Submit</button>
         </form>
       </section>
+
   @endsection
